@@ -4,17 +4,15 @@ const mongoose=require('mongoose');
 const dotenv=require('dotenv');
 dotenv.config();
 const app=express();
-const port = process.env.PORT || 5000;
+
 
 
 app.use(express.json());
 // app.use(cors());
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors());
 
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => console.log('Connected'))
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log('Connected'))
 .catch(err => console.error(err));
 
 
@@ -27,12 +25,12 @@ const BlogSchema = new mongoose.Schema({
 
 
 const Blog = mongoose.model('Blog', BlogSchema);
-
+ 
 app.post('/api/blogs', async (req, res) => {
     try {
         const blog = new Blog(req.body);
         await blog.save();
-        res.status(201).json(blog);
+        res.status(200).json(blog);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
@@ -47,10 +45,10 @@ app.get('/api/blogs', async (req, res) => {
     }
 });
 
-app.get('/api/blogs/:id', async (req, res) => {
+app.get('/api/blogs/:idhjbhjbh', async (req, res) => {
     try {
         const blog = await Blog.findByIdAndUpdate(
-            req.params.id,
+            req.params.idhjbhjbh,
             { $inc: { views: 1 } },
             { new: true }
         );
@@ -81,5 +79,5 @@ app.delete('/api/blogs/:id', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

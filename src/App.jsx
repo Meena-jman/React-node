@@ -16,13 +16,7 @@ import EditBlog from './components/editblogs'
 
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-
+  
   return (
     <>
     
